@@ -1,0 +1,21 @@
+Corretor->+Tela_seleção_de_cliente: Selecionar cliente
+    Tela_seleção_de_cliente->+Controle_cálculo_Cotação: Receber requisição
+    Controle_cálculo_Cotação-->-Tela_seleção_de_cliente: Receber requisição
+Tela_seleção_de_cliente-->-Corretor: Selecionar cliente
+Corretor->+Tela_opções_Coberturas: Selecionar opções de cobertura
+    Tela_opções_Coberturas->+Controle_cálculo_Cotação: Buscar info Cliente, Seguradora e Veículo
+        Controle_cálculo_Cotação->+Veículo: Buscar modelo do Veículo
+        Veículo-->-Controle_cálculo_Cotação: Buscar modelo do Veículo
+        Controle_cálculo_Cotação->Controle_cálculo_Cotação: Buscar VMR do veículo
+    Controle_cálculo_Cotação-->Tela_opções_Coberturas: Buscar info Cliente, Seguradora e Veículo
+Tela_opções_Coberturas-->-Corretor: Selecionar opções de cobertura
+Corretor->+Tela_formulário_Cotação: Selecionar VMR ou valor determinado
+    Tela_formulário_Cotação-> Controle_cálculo_Cotação: Buscar valores de contratação de Cotação
+        Controle_cálculo_Cotação->+Cotação: Calcular Prêmio Líquido e Prêmio Total
+        Cotação-->Controle_cálculo_Cotação: Calcular Prêmio Líquido e Prêmio Total
+        Controle_cálculo_Cotação->Cotação: Calcular franquia
+        Cotação-->-Controle_cálculo_Cotação: Calcular franquia
+        
+        Controle_cálculo_Cotação->Controle_cálculo_Cotação: Registrar Cotação
+    Controle_cálculo_Cotação-->- Tela_formulário_Cotação: Buscar valores de contratação de Cotação
+Tela_formulário_Cotação-->-Corretor: Selecionar VMR ou valor determinado
