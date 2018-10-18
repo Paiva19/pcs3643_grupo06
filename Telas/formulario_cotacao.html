@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Formulário Cotação</title>
+		<link rel="stylesheet" href="common.css" />
+		<style>
+		form { padding: 5px ; }
+		fieldset {
+			display: block;
+			padding: 5px;
+			margin: 5px;
+		}
+		</style>
+	</head>
+	<body>
+		<form method="POST" action="" name="form1">
+			<p>Olár, <b>${NomeDoCliente}</b>!</p>
+			<fieldset>
+				<legend>Tipo de cobertura</legend>
+				<select name="CoberturaTipo" disabled>
+					<option value="0">Compreensivo</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>Veículo segurado</legend>
+				<select style="display: block;">
+					<option>Carro maneirão</option>
+					<option>Carro velho</option>
+				</select>
+				<label><input type="radio" name="valorVeiculo" value="" />${Valor de Mercado Referenciado}</label><br />
+				<input type="radio" name="valorVeiculo" value="" />
+				<input type="number" name="valorDeterminado" placeholder="Valor Determinado" pattern="^[0-9]+(\.[0-9]{1,2})?$" />
+			</fieldset>
+			<fieldset>
+				<legend>Danos materiais</legend>
+				<input
+					type="checkbox"
+					name="danosMateriaisEnable"
+					onchange="document.form1.danosMateriais.disabled = !document.form1.danosMateriaisEnable.checked" />
+				<input type="number" name="danosMateriais" value="100000.00"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
+			</fieldset>
+			<fieldset>
+				<legend>Danos corporais</legend>
+				<input
+					type="checkbox"
+					name="danosCorporaisEnable"
+					onchange="document.form1.danosCorporais.disabled = !document.form1.danosCorporaisEnable.checked" />
+				<input type="number" name="danosCorporais" value="100000.00"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
+			</fieldset>
+			<fieldset>
+				<legend>Franquia casco</legend>
+				<select name="franquiaCasco">
+					<option value="0">Majorada</option>
+					<option value="1">Obrigatória</option>
+					<option value="2">Reduzida</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<label><input type="checkbox" name="franquiaAcessorios" />Franquia acessórios</label>
+			</fieldset>
+			<input type="submit" onclick="document.getElementById('premios').style.display = 'block'; return false;" />
+			<fieldset id="premios" style="display:none;">
+				<legend>Prêmios</legend>
+				<p>Casco: ${PrêmioCasco}</p>
+				<p>Acessórios: ${PrêmioAcessórios}</p>
+				<p>Danos materiais: ${PrêmioDanosMateriais}</p>
+				<p>Danos corporais: ${PrêmioDanosCorporais}</p>
+				<p>IOF: ${IOF}</p>
+				<p>Prêmio Líquido: ${PrêmioLíquido}; Prêmio Total: ${PrêmioTotal}</p>
+				<button>Finalizar Cotação</button>
+				<span style="float: right"><button>Gerar Apólice</button></span>
+			</fieldset>
+		</form>
+	</body>
+</html>
