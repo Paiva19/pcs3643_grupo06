@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Detalhes de Cotação</title>
+		<link rel="stylesheet" href="common.css" />
+		<style>
+		p { margin: 2px; }
+		fieldset {
+			margin: 5px;
+		}
+		</style>
+	</head>
+	<body>
+		<fieldset>
+			<legend>Tipo de cobertura</legend>
+			<p>Tipo: Compreensivo</p>
+		</fieldset>
+		<fieldset>
+			<legend>Corretor</legend>
+			<p>${Nome}</p>
+			<p>${Telefone}</p>
+			<p>${Email}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Cliente</legend>
+			<p>${Nome}</p>
+			<p>${CPF}</p>
+			<p>${Sexo}</p>
+			<p>${Nacionalidade}</p>
+			<p>${Data de nascimento}</p>
+			<p>${Profissão}</p>
+			<p>${Telefone}</p>
+			<p>${Endereço}</p>
+			<p>${Email}</p>
+			<p>${CNH}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Seguradora</legend>
+			<p>Seguro Auto Ldta.</p>
+			<p>${Endereço}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Veículo segurado</legend>
+			<p>${FIPE}</p>
+			<p>${Marca}</p>
+			<p>${Modelo}</p>
+			<p>${Portas}</p>
+			<p>${AnoFabricação}</p>
+			<p>${AnoModelo}</p>
+			<p>${NúmeroPassageiros}</p>
+			<p>${Chassi}</p>
+			<p>${Renavam}</p>
+			<p>${NomeCondutor}</p>
+			<p>${Classe}</p>
+			<p>${ValorVeículo}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Danos materiais</legend>
+			<p>${DanosMateriais}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Danos corporais</legend>
+			<p>${DanosCorporais}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Franquia casco</legend>
+			<p>${FranquiaCasco}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Franquia acessórios</legend>
+			<p>${FranquiaAcessórios}</p>
+		</fieldset>
+		<fieldset>
+			<legend>Prêmios</legend>
+			<p>Casco: ${PrêmioCasco}</p>
+			<p>Acessórios: ${PrêmioAcessórios}</p>
+			<p>Danos materiais: ${PrêmioDanosMateriais}</p>
+			<p>Danos corporais: ${PrêmioDanosCorporais}</p>
+			<p>IOF: ${IOF}</p>
+			<p>Prêmio Líquido: ${PrêmioLíquido}; Prêmio Total: ${PrêmioTotal}</p>
+		</fieldset>
+		<button>Confirmar venda</button>
+		<span style="float: right"><button>Cancelar</button></span>
+	</body>
+</html>
