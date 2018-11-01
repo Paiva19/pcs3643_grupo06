@@ -4,7 +4,6 @@ public class Veiculo {
 	private String modelo;
 	private int id;
 	
-	
 	public Veiculo(int id, String modelo){
 		super();
 		this.id = id;
