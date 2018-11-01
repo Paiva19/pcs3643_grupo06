@@ -1,13 +1,15 @@
 package atividade;
 
+import java.util.Date;
+
 public class Cotacao {
-	private String data_de_inicio;
-	private String data_de_fim;
+	private Date data_de_inicio;
+	private Date data_de_fim;
 	private float premio_liquido;
 	private float premio_total;
 	private float valor_veiculo;
 	private float franquia;
-	private int id;
+	private int id;	
 	
 	public Cotacao(int id) {
 		this.id = id;
@@ -17,16 +19,16 @@ public class Cotacao {
 		return this.id;
 	}
 	
-	public String getData_de_inicio() {
+	public Date getData_de_inicio() {
 		return data_de_inicio;
 	}
-	public void setData_de_inicio(String data_de_inicio) {
+	public void setData_de_inicio(Date data_de_inicio) {
 		this.data_de_inicio = data_de_inicio;
 	}
-	public String getData_de_fim() {
+	public Date getData_de_fim() {
 		return data_de_fim;
 	}
-	public void setData_de_fim(String data_de_fim) {
+	public void setData_de_fim(Date data_de_fim) {
 		this.data_de_fim = data_de_fim;
 	}
 	public float getPremio_liquido() {
