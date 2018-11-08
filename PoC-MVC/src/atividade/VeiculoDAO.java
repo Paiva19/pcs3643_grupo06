@@ -18,7 +18,7 @@ public class VeiculoDAO {
 	private Connection GetConnection() {
 		Connection conn = null;
 		try {
-			Class.forName("org.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://143.107.102.7:3306/t1g6",
 													 "t1g6", "XFfw*PhB");			
 		} catch(ClassNotFoundException e){
@@ -52,10 +52,10 @@ public class VeiculoDAO {
 	public Veiculo findVeiculoByPrimaryKey (int id) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try{
-			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos WHERE veiculo_id = ?");
+			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos WHERE id = ?");
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			Veiculo veiculo = new Veiculo(resultSet.getInt("veiculo_id"), resultSet.getString("modelo"));
+			Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("modelo"));
 			return veiculo;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class VeiculoDAO {
 			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()){
-				Veiculo veiculo = new Veiculo(resultSet.getInt("veiculo_id"), resultSet.getString("modelo"));
+				Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("modelo"));
 				veiculos.add(veiculo);
 			}
 			return veiculos;

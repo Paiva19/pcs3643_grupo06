@@ -2,16 +2,16 @@ package atividade;
 
 public class Veiculo {
 	private String modelo;
-	private int id;
+	private int id_veiculo;
 	
-	public Veiculo(int id, String modelo){
+	public Veiculo(int id_veiculo, String modelo){
 		super();
-		this.id = id;
+		this.id_veiculo = id_veiculo;
 		this.modelo = modelo;
 	}
 	
 	public int getId() {
-		return this.id;
+		return this.id_veiculo;
 	}
 	public String getModelo() {
 		return this.modelo;
