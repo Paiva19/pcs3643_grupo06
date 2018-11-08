@@ -14,8 +14,8 @@ public class CotacaoDAO {
 	
 	public CotacaoDAO() {
 		try {
-			Class.forName("org.mysql.jbdc.Driver");
-			connection = DriverManager.getConnection("jbdc:mysql://143.107.102.7:3306/t1g6",
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://143.107.102.7:3306/t1g6",
 					"t1g6", "XFfw*PhB");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

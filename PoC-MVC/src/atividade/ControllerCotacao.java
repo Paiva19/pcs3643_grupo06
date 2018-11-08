@@ -16,25 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet("/Controller")
-public class Controller extends HttpServlet {
+@WebServlet("/cotacoes")
+public class ControllerCotacao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Cotacao> cotacoes;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Controller() {
+    public ControllerCotacao() {
         super();
-        this.cotacoes = new ArrayList<Cotacao>();
-        CotacaoDAO cotacaoDAO = new CotacaoDAO();
-        try {
-        	this.cotacoes = cotacaoDAO.getAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
     }
 
 	/**
@@ -44,15 +34,28 @@ public class Controller extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		if (id == null) {
-			request.setAttribute("lista", this.cotacoes);
-			RequestDispatcher requestDispatcher =
-			 getServletContext().getRequestDispatcher("/lista.jsp");
-			requestDispatcher.forward(request, response);
+	        try {
+	        	CotacaoDAO cotacaoDAO = new CotacaoDAO();
+	        	ArrayList<Cotacao> cotacoes = cotacaoDAO.getAll();
+	        	request.setAttribute("lista", cotacoes);
+				RequestDispatcher requestDispatcher =
+				 getServletContext().getRequestDispatcher("/lista_cotacoes.jsp");
+				requestDispatcher.forward(request, response);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			request.setAttribute("cotacao", this.cotacoes.get(Integer.parseInt(id)));
-			RequestDispatcher requestDispatcher =
-			 getServletContext().getRequestDispatcher("/detalhe.jsp");
-			requestDispatcher.forward(request, response);
+			try {
+				CotacaoDAO cotacaoDAO = new CotacaoDAO();
+				Cotacao cotacao = cotacaoDAO.findByPrimaryKey(Integer.parseInt(id)); 
+				request.setAttribute("cotacao", cotacao);
+				RequestDispatcher requestDispatcher =
+						getServletContext().getRequestDispatcher("/detalhes_cotacao.jsp");
+				requestDispatcher.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

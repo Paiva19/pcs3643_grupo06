@@ -18,7 +18,7 @@ public class VeiculoDAO {
 	private Connection GetConnection() {
 		Connection conn = null;
 		try {
-			Class.forName("org.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://143.107.102.7:3306/t1g6",
 													 "t1g6", "XFfw*PhB");			
 		} catch(ClassNotFoundException e){
