@@ -1,4 +1,4 @@
-package servletPackage;
+package atividade;
 
 public class Veiculo {
 	private String modelo;
