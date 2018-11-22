@@ -15,5 +15,6 @@
 		</fieldset>
 		<button>Gerar relatório</button>
 	</form>
+	<a href="home">Voltar</a>
 </body>
 </html>

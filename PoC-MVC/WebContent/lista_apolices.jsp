@@ -16,5 +16,6 @@
 			<a href="apolices?&id=<%= c.get(i).getId() %>" title="Editar"><%= c.get(i).getStatus() %></a></li>
 		<% } %>
 	</ul>
+	<a href="home">Voltar</a>
 </body>
 </html>

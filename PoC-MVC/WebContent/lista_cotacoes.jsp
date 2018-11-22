@@ -51,5 +51,6 @@
 				<% } %>
 			</tbody>
 		</table>
+		<a href="home">Voltar</a>
 	</body>
 </html>

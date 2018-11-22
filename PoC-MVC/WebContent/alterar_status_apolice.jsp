@@ -19,5 +19,6 @@
 		<input type="hidden" name="id" value="<%= ap.getId() %>" />
 		<input type="submit" />
 	</form>
+	<a href="apolices">Voltar</a>
 </body>
 </html>
