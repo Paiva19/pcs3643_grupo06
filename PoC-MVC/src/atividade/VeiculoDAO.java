@@ -55,7 +55,9 @@ public class VeiculoDAO {
 			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos WHERE id = ?");
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("modelo"));
+			Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
+					resultSet.getInt("portas"), resultSet.getInt("anoFabricacao"), resultSet.getInt("anoModelo"), resultSet.getInt("nPassageiros"),
+					resultSet.getString("chassi"), resultSet.getString("renavam"), resultSet.getString("classe"));
 			return veiculo;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +79,9 @@ public class VeiculoDAO {
 			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()){
-				Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("modelo"));
+				Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
+						resultSet.getInt("portas"), resultSet.getInt("anoFabricacao"), resultSet.getInt("anoModelo"), resultSet.getInt("nPassageiros"),
+						resultSet.getString("chassi"), resultSet.getString("renavam"), resultSet.getString("classe"));
 				veiculos.add(veiculo);
 			}
 			return veiculos;
