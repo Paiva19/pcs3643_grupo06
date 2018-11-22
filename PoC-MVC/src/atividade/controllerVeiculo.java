@@ -18,7 +18,7 @@ import com.ibm.CORBA.iiop.Request;
 /**
  * Servlet implementation class controllerVeiculo
  */
-@WebServlet("/veiculos")
+@WebServlet("/controllerVeiculo")
 public class controllerVeiculo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ArrayList<Veiculo> veiculos;
@@ -49,7 +49,13 @@ public class controllerVeiculo extends HttpServlet {
 			requestDispatcher.forward(request, response);
 		}
 		else{
-			request.setAttribute("detalheVeiculo", this.veiculos.get((Integer.parseInt(id))));
+			try {
+				VeiculoDAO veiculoDAO= new VeiculoDAO();
+				request.setAttribute("detalheVeiculo", veiculoDAO.findVeiculoByPrimaryKey((Integer.parseInt(id))));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/detalheVeiculo.jsp");
 			requestDispatcher.forward(request, response);
 		}

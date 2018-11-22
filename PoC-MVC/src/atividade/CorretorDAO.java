@@ -31,7 +31,7 @@ public class CorretorDAO {
 	public boolean CreateCorretor(Corretor corretor) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try {
-		preparedStatement = connection.prepareStatement("INSERT INTO corretores (	"
+		preparedStatement = connection.prepareStatement("INSERT INTO Corretores (	"
 				+ "	id_corretor, nome, telefone, email) "
 				+ "VALUES (?, ?, ?, ?)");
 		preparedStatement.setInt(1, corretor.getId_corretor());
@@ -56,7 +56,7 @@ public class CorretorDAO {
 	public Corretor findCorretorByPrimaryKey (int id) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try{
-			preparedStatement = connection.prepareStatement("SELECT * FROM corretores WHERE id_corretor = ?");
+			preparedStatement = connection.prepareStatement("SELECT * FROM Corretores WHERE id_corretor = ?");
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			Corretor corretor = new Corretor(resultSet.getInt("corretor_id"), resultSet.getString("nome"), resultSet.getString("telefone"), resultSet.getString("email"));

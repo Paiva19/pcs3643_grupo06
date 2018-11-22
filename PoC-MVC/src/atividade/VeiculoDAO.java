@@ -32,7 +32,7 @@ public class VeiculoDAO {
 	public boolean CreateVeiculo(Veiculo veiculo) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try {
-		preparedStatement = connection.prepareStatement("INSERT INTO veiculos (	"
+		preparedStatement = connection.prepareStatement("INSERT INTO Veiculos (	"
 				+ "id_veiculo, fipe, marca, modelo, portas, anoFabricacao, anoModelo, nPassageiros, chassi, renavam, classe) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		preparedStatement.setInt(1, veiculo.getId());
@@ -65,9 +65,10 @@ public class VeiculoDAO {
 	public Veiculo findVeiculoByPrimaryKey (int id) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try{
-			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos WHERE id_veiculo = ?");
+			preparedStatement = connection.prepareStatement("SELECT * FROM Veiculos WHERE id_veiculo = ?");
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
 			Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
 					resultSet.getInt("portas"), resultSet.getInt("anoFabricacao"), resultSet.getInt("anoModelo"), resultSet.getInt("nPassageiros"),
 					resultSet.getString("chassi"), resultSet.getString("renavam"), resultSet.getString("classe"));
@@ -89,7 +90,7 @@ public class VeiculoDAO {
 		PreparedStatement preparedStatement = null;
 		try{
 			ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
-			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos");
+			preparedStatement = connection.prepareStatement("SELECT * FROM Veiculos");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()){
 				Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
@@ -115,7 +116,7 @@ public class VeiculoDAO {
 	public boolean updateVeiculo(Veiculo veiculo) throws SQLException{
 		PreparedStatement preparedStatement = null;
 			try {
-				preparedStatement = connection.prepareStatement("UPDATE veiculos SET "
+				preparedStatement = connection.prepareStatement("UPDATE Veiculos SET "
 						+ "fipe = ?, marca = ?, modelo = ?, portas = ?, anoFabricacao = ?, anoModelo = ?, nPassageiros = ?, chassi = ?, renavam = ?, classe = ?  "
 						+ "WHERE id_veiculo = ?");
 				preparedStatement.setString(1, veiculo.getFipe());
@@ -152,7 +153,7 @@ public class VeiculoDAO {
 	public boolean removeVeiculo (int id) throws SQLException{
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("DELETE FROM veiculos WHERE id_veiculo = ?");
+			preparedStatement = connection.prepareStatement("DELETE FROM Veiculos WHERE id_veiculo = ?");
 			preparedStatement.setInt(1, id);
 			if(id > 0){
 				ResultSet resultSet = preparedStatement.executeQuery();

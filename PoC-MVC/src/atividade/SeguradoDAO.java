@@ -27,7 +27,7 @@ public class SeguradoDAO {
 	public boolean create(Segurado segurado) throws SQLException {
 		PreparedStatement preparedstatement = null;
 		try {
-			preparedstatement = connection.prepareStatement("INSERT INTO segurados ("
+			preparedstatement = connection.prepareStatement("INSERT INTO Segurados ("
 					+"id_segurado, nome, cpf, sexo, nacionalidade, data_de_nascimento, profissao, telefone, endereco, email, cnh) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			preparedstatement.setInt(1, segurado.getId_segurado());
@@ -59,7 +59,7 @@ public class SeguradoDAO {
 	public Segurado findByPrimaryKey(int id) throws SQLException {
 		PreparedStatement preparedstatement = null;
 		try {
-			preparedstatement = connection.prepareStatement("SELECT * FROM segurados WHERE "
+			preparedstatement = connection.prepareStatement("SELECT * FROM Segurados WHERE "
 					+ "id_segurado = ?");
 			preparedstatement.setInt(1, id);
 			ResultSet result = preparedstatement.executeQuery();
@@ -87,7 +87,7 @@ public class SeguradoDAO {
 		PreparedStatement preparedstatement = null;
 		ArrayList<Segurado> segurados = new ArrayList<Segurado>();
 		try {
-			preparedstatement = connection.prepareStatement("SELECT * FROM segurados");
+			preparedstatement = connection.prepareStatement("SELECT * FROM Segurados");
 			ResultSet result = preparedstatement.executeQuery();
 			while (result.next()) {
 				Segurado segurado = new Segurado(result.getInt("id_segurado"), result.getString("nome"), result.getString("cpf"), result.getString("sexo"), result.getString("nacionalidade"), result.getDate("data_de_nascimento"), result.getString("profissao"), result.getString("telefone"), result.getString("endereco"), result.getString("email"), result.getString("cnh"));
@@ -112,7 +112,7 @@ public class SeguradoDAO {
 	public boolean remove(int id) throws SQLException {
 		PreparedStatement preparedstatement = null;
 		try {
-			preparedstatement = connection.prepareStatement("DELETE FROM segurados WHERE "
+			preparedstatement = connection.prepareStatement("DELETE FROM Segurados WHERE "
 					+ "id_segurado = ?");
 			preparedstatement.setInt(1, id);
 			ResultSet result = preparedstatement.executeQuery();
