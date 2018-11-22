@@ -32,7 +32,9 @@ public class VeiculoDAO {
 	public boolean CreateVeiculo(Veiculo veiculo) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try {
-		preparedStatement = connection.prepareStatement("INSERT INTO veiculos (modelo) VALUES (?)");
+		preparedStatement = connection.prepareStatement("INSERT INTO veiculos (	"
+				+ "id_veiculo, fipe, marca, modelo, portas, anoFabricacao, anoModelo, nPassageiros, chassi, renavam, classe) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		preparedStatement.setString(1, veiculo.getModelo());
 		ResultSet resultset = preparedStatement.executeQuery();
 		return true;
@@ -102,9 +104,22 @@ public class VeiculoDAO {
 	public boolean updateVeiculo(Veiculo veiculo) throws SQLException{
 		PreparedStatement preparedStatement = null;
 			try {
-				preparedStatement = connection.prepareStatement("UPDATE veiculos SET modelo = ? WHERE id_veiculo = ?");
-				preparedStatement.setString(1, veiculo.getModelo());
-				preparedStatement.setInt(2, veiculo.getId());
+				preparedStatement = connection.prepareStatement("UPDATE veiculos SET "
+						+ "fipe = ?, marca = ?, modelo = ?, portas = ?, anoFabricacao = ?, anoModelo = ?, nPassageiros = ?, chassi = ?, renavam = ?, classe = ?  "
+						+ "WHERE id_veiculo = ?");
+				preparedStatement.setString(1, veiculo.getFipe());
+				preparedStatement.setString(2, veiculo.getMarca());
+				preparedStatement.setString(3, veiculo.getModelo());
+				preparedStatement.setInt(4, veiculo.getPortas());
+				preparedStatement.setInt(5, veiculo.getAnoFabricacao());
+				preparedStatement.setInt(6, veiculo.getAnoModelo());
+				preparedStatement.setInt(7, veiculo.getnPassageiros());
+				preparedStatement.setString(8, veiculo.getChassi());
+				preparedStatement.setString(9, veiculo.getChassi());
+				preparedStatement.setString(10, veiculo.getRenavam());
+				preparedStatement.setString(11, veiculo.getClasse());
+				preparedStatement.setInt(12, veiculo.getId());
+				
 				if(veiculo.getId() > 0){
 					ResultSet resultSet = preparedStatement.executeQuery();
 					return true;
