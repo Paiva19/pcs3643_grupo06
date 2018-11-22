@@ -18,7 +18,7 @@ import com.ibm.CORBA.iiop.Request;
 /**
  * Servlet implementation class controllerVeiculo
  */
-@WebServlet("/controllerVeiculo")
+@WebServlet("/veiculos")
 public class controllerVeiculo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ArrayList<Veiculo> veiculos;

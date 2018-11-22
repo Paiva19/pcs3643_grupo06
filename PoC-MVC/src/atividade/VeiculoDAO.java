@@ -35,7 +35,18 @@ public class VeiculoDAO {
 		preparedStatement = connection.prepareStatement("INSERT INTO veiculos (	"
 				+ "id_veiculo, fipe, marca, modelo, portas, anoFabricacao, anoModelo, nPassageiros, chassi, renavam, classe) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		preparedStatement.setString(1, veiculo.getModelo());
+		preparedStatement.setInt(1, veiculo.getId());
+		preparedStatement.setString(2, veiculo.getFipe());
+		preparedStatement.setString(3, veiculo.getMarca());
+		preparedStatement.setString(4, veiculo.getModelo());
+		preparedStatement.setInt(5, veiculo.getPortas());
+		preparedStatement.setInt(6, veiculo.getAnoFabricacao());
+		preparedStatement.setInt(7, veiculo.getAnoModelo());
+		preparedStatement.setInt(8, veiculo.getnPassageiros());
+		preparedStatement.setString(9, veiculo.getChassi());
+		preparedStatement.setString(10, veiculo.getChassi());
+		preparedStatement.setString(11, veiculo.getRenavam());
+		preparedStatement.setString(12, veiculo.getClasse());
 		ResultSet resultset = preparedStatement.executeQuery();
 		return true;
 		} catch (SQLException e) {
@@ -54,7 +65,7 @@ public class VeiculoDAO {
 	public Veiculo findVeiculoByPrimaryKey (int id) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try{
-			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos WHERE id = ?");
+			preparedStatement = connection.prepareStatement("SELECT * FROM veiculos WHERE id_veiculo = ?");
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
