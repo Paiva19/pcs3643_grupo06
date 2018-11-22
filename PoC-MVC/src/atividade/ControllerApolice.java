@@ -46,22 +46,6 @@ public class ControllerApolice extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (status != null && id != null) {
-			ApoliceDAO apoliceDAO = new ApoliceDAO();
-			Apolice apolice;
-			try {
-				apolice = apoliceDAO.findByPrimaryKey(Integer.parseInt(id));
-				apolice.setStatus(status);
-				apoliceDAO = new ApoliceDAO();
-				boolean res = apoliceDAO.update(apolice);
-				response.sendRedirect("apolices");
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		} else {
 			ApoliceDAO apoliceDAO = new ApoliceDAO();
 			Apolice apolice;
@@ -85,8 +69,27 @@ public class ControllerApolice extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String id = request.getParameter("id");
+		String status = request.getParameter("status");
+		if (id == null || status == null) {
+			response.getWriter().append("Faltaram id e/ou status, viu?");
+		} else {
+			ApoliceDAO apoliceDAO = new ApoliceDAO();
+			Apolice apolice;
+			try {
+				apolice = apoliceDAO.findByPrimaryKey(Integer.parseInt(id));
+				apolice.setStatus(status);
+				apoliceDAO = new ApoliceDAO();
+				boolean res = apoliceDAO.update(apolice);
+				response.sendRedirect("apolices");
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

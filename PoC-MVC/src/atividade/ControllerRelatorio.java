@@ -44,11 +44,11 @@ public class ControllerRelatorio extends HttpServlet {
 		String[] dataInicialStr = request.getParameter("data_inicial").split("-");
 		String[] dataFinalStr = request.getParameter("data_final").split("-");
 		Date dataInicial = new Date(
-				Integer.parseInt(dataInicialStr[0]),
+				Integer.parseInt(dataInicialStr[0]) - 1900,
 				Integer.parseInt(dataInicialStr[1]),
 				Integer.parseInt(dataInicialStr[2]));
 		Date dataFinal = new Date(
-				Integer.parseInt(dataFinalStr[0]),
+				Integer.parseInt(dataFinalStr[0]) - 1900,
 				Integer.parseInt(dataFinalStr[1]),
 				Integer.parseInt(dataFinalStr[2])
 				);

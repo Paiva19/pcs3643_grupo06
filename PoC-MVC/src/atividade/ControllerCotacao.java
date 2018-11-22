@@ -64,8 +64,8 @@ public class ControllerCotacao extends HttpServlet {
 			Apolice apolice = new Apolice(
 					0,
 					ThreadLocalRandom.current().nextInt(1, 70 + 1),
-					new Date(2018, 11, 22),
-					new Date(2019, 11, 22),
+					new Date(2018 - 1900, 11, 22),
+					new Date(2019 - 1900, 11, 22),
 					"ativa"
 			);
 			response.sendRedirect("apolices");

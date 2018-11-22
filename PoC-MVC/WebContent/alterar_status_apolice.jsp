@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="common.css" />
 </head>
 <body>
-	<form>
+	<form method="POST">
 		<label>Status: <select name="status">
 			<option value="ativa">Ativa</option>
 			<option value="encerrada">Encerrada</option>
