@@ -13,12 +13,21 @@
 	<table>
 		<tr>
 			<th>Id</th>
+			<th>Marca</th>
 			<th>Modelo</th>
+			<th>Ano de Fabricação</th>
+			<th>Ano do Modelo</th>
+			<th>Núm. Portas</th>
+			<th>Classe</th>
 		</tr>
-		
 		<tr>
 			<td> <%= v.getId() %> </td>
+			<td> <%= v.getMarca() %> </td>
 			<td> <%= v.getModelo() %> </td>
+			<td> <%= v.getAnoFabricacao() %> </td>
+			<td> <%= v.getAnoModelo() %> </td>
+			<td> <%= v.getPortas() %> </td>
+			<td> <%= v.getClasse() %> </td>
 		</tr>
 	</table>
 

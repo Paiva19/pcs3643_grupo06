@@ -5,20 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista de Veículos</title>
 </head>
 <body>
 	<% ArrayList<Veiculo> v = (ArrayList<Veiculo>) request.getAttribute("listarVeiculos"); %>
 	<h2>Todos os veículos cadastrados</h2>
 	<table>
 		<tr>
+			<th>Marca</th>
 			<th>Modelo</th>
+			<th>Ano do Modelo</th>
+			<th>Ano de Fabricação</th>
 			<th>Detalhes</th>
 		</tr>
 		<% for (int i =0; i<v.size(); i++) { %>
 		<tr>
+			<td> <%= v.get(i).getMarca() %> </td>
 			<td> <%= v.get(i).getModelo() %> </td>
-			<td> <a href="controllerVeiculo?id=<%= v.get(i).getId() %>">Ver detalhes</a> </td>
+			<td> <%= v.get(i).getAnoModelo() %> </td>
+			<td> <%= v.get(i).getAnoFabricacao() %> </td>
+			
+			<td> <a href="controllerVeiculo?id=<%= v.get(i).getId() %>">Detalhes</a> </td>
 		</tr>
 		<% } %>
 	</table>
