@@ -1,6 +1,7 @@
 package atividade;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -26,19 +27,14 @@ public class controllerVeiculo extends HttpServlet {
      */
     public controllerVeiculo() {
         super();
+        VeiculoDAO veiculoDAO = new VeiculoDAO();
         this.veiculos = new ArrayList<Veiculo>();
-        Veiculo mustang = new Veiculo(0, "Mustang");
-        this.veiculos.add(mustang);
-        Veiculo carroVelho = new Veiculo(1, "Carro Velho");
-        this.veiculos.add(carroVelho);
-        Veiculo nissanZ = new Veiculo(2, "350Z");
-        this.veiculos.add(nissanZ);
-        Veiculo fiesta = new Veiculo(3, "Fiesta");
-        this.veiculos.add(fiesta);
-        Veiculo zafira = new Veiculo(4, "Zafira");
-        this.veiculos.add(zafira);
-        Veiculo agabe = new Veiculo(5, "HB14");
-        this.veiculos.add(agabe);
+        try {
+        	this.veiculos = veiculoDAO.GetAllVeiculos();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 	/**
