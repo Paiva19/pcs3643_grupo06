@@ -1,10 +1,8 @@
 package atividade;
 
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,20 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
- * Servlet implementation class Controller
+ * Servlet implementation class ControllerApolice
  */
-@WebServlet("/cotacoes")
-public class ControllerCotacao extends HttpServlet {
+@WebServlet("/apolices")
+public class ControllerApolice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerCotacao() {
+    public ControllerApolice() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,42 +32,45 @@ public class ControllerCotacao extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
-		String vender = request.getParameter("vender");
+		String status = request.getParameter("status");
 		if (id == null) {
-	        try {
-	        	CotacaoDAO cotacaoDAO = new CotacaoDAO();
-	        	ArrayList<Cotacao> cotacoes = cotacaoDAO.getAll();
-	        	request.setAttribute("lista", cotacoes);
+			ApoliceDAO apoliceDAO = new ApoliceDAO();
+			ArrayList<Apolice> apolices;
+			try {
+				apolices = apoliceDAO.getAll();
+				request.setAttribute("lista", apolices);
 				RequestDispatcher requestDispatcher =
-				 getServletContext().getRequestDispatcher("/lista_cotacoes.jsp");
+				 getServletContext().getRequestDispatcher("/lista_apolices.jsp");
 				requestDispatcher.forward(request, response);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (vender == null) {
+		} else if (status != null && id != null) {
+			ApoliceDAO apoliceDAO = new ApoliceDAO();
+			Apolice apolice;
 			try {
-				CotacaoDAO cotacaoDAO = new CotacaoDAO();
-				Cotacao cotacao = cotacaoDAO.findByPrimaryKey(Integer.parseInt(id)); 
-				request.setAttribute("cotacao", cotacao);
-				RequestDispatcher requestDispatcher =
-						getServletContext().getRequestDispatcher("/detalhes_cotacao.jsp");
-				requestDispatcher.forward(request, response);
+				apolice = apoliceDAO.findByPrimaryKey(Integer.parseInt(id));
+				apolice.setStatus(status);
+				apoliceDAO = new ApoliceDAO();
+				boolean res = apoliceDAO.update(apolice);
+				response.sendRedirect("apolices");
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			ApoliceDAO apoliceDAO = new ApoliceDAO();
-			Apolice apolice = new Apolice(
-					0,
-					ThreadLocalRandom.current().nextInt(1, 70 + 1),
-					new Date(2018, 11, 22),
-					new Date(2019, 11, 22),
-					"ativa"
-			);
-			response.sendRedirect("apolices");
+			Apolice apolice;
 			try {
-				apoliceDAO.create(apolice, new Cotacao(Integer.parseInt(id)));
+				apolice = apoliceDAO.findByPrimaryKey(Integer.parseInt(id));
+				request.setAttribute("apolice", apolice);
+				RequestDispatcher requestDispatcher =
+						getServletContext().getRequestDispatcher("/alterar_status_apolice.jsp");
+				requestDispatcher.forward(request, response);
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

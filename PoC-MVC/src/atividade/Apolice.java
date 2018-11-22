@@ -1,6 +1,6 @@
 package atividade;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Apolice {
 	private int numero_da_apolice;

@@ -89,7 +89,12 @@
 			<p>IOF: ${IOF}</p>
 			<p>Prêmio Líquido: <%= c.getPremio_liquido() %>; Prêmio Total: <%= c.getPremio_total() %></p>
 		</fieldset>
-		<button>Confirmar venda</button>
+		<form method="GET" style="display:inline;">
+			<button>Confirmar venda</button>
+			<input type="hidden" name="vender" value="1" />
+			<input type="hidden" name="id" value="<%= c.getId() %>" />
+		</form>
 		<span style="float: right"><form action="cotacoes"><button>Cancelar</button></form></span>
+		
 	</body>
 </html>
