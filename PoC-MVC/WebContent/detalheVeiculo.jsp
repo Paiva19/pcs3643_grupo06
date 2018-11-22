@@ -30,7 +30,7 @@
 			<td> <%= v.getClasse() %> </td>
 		</tr>
 	</table>
-
+	<a href="controllerVeiculo">Voltar</a>
 	
 </body>
 </html>
