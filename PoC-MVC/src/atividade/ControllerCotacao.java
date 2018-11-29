@@ -34,9 +34,25 @@ public class ControllerCotacao extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("oi rs");
 		String id = request.getParameter("id");
 		String vender = request.getParameter("vender");
-		if (id == null) {
+		String id_segurado = request.getParameter("id_segurado");
+		if(id_segurado != null){				
+			try {
+				SeguradoDAO seguradoDAO= new SeguradoDAO();
+				request.setAttribute("segurado", seguradoDAO.findByPrimaryKey((Integer.parseInt(id_segurado))));
+				VeiculoDAO veiculoDAO = new VeiculoDAO();
+				request.setAttribute("veiculos", veiculoDAO.GetVeiculosByDonoId(Integer.parseInt(id_segurado)));
+				RequestDispatcher requestDispatcher =
+						getServletContext().getRequestDispatcher("/formulario_cotacao.jsp");
+				requestDispatcher.forward(request, response);
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else if (id == null) {
 	        try {
 	        	CotacaoDAO cotacaoDAO = new CotacaoDAO();
 	        	ArrayList<Cotacao> cotacoes = cotacaoDAO.getAll();
@@ -85,8 +101,42 @@ public class ControllerCotacao extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	//	variavel aqui = request.getParameter(nome do parametro)
+		String idSegurado = request.getParameter("seguradoId");
+		String idVeiculo = request.getParameter("veiculoId");
+		System.out.println("ID segurado: " + idSegurado + " ID Veiculo: " + idVeiculo);
+		int vdOuVmr = Integer.parseInt(request.getParameter("valorVeiculo"));
+		float danosMateriais = Float.parseFloat(request.getParameter("danosMateriais"));
+		float danosCorporais = Float.parseFloat(request.getParameter("danosCorporais"));
+		int qualFranquiaCasco = Integer.parseInt(request.getParameter("franquiaCasco"));
+		float valorAcessorios = Float.parseFloat(request.getParameter("franquiaAcessorios"));
+		float valorVeiculo;
+		
+		float franquiaCasco = 0;
+		float franquiaAcessorios = 0;
+		float premioCasco = 0;
+		float premioAcessorios = 0;
+		float premioDanosMateriais = 0;
+		float premioDanosCorporais = 0;
+		float iof = 0;
+		float premioLiquido = 0;
+		float premioTotal = 0;
+		
+		if(vdOuVmr == 0){
+			valorVeiculo = Float.parseFloat(request.getParameter("valorDeterminado"));
+		}
+		else {
+			valorVeiculo = Float.parseFloat(request.getParameter("VMR"));
+		}
+		//Calculo Franquias
+		franquiaCasco = (0.1f - 0.02f * qualFranquiaCasco) * valorVeiculo;
+		franquiaCasco = 0.15f * valorAcessorios;
+		
+		//Calculo Premios
+		
+		
+		
+		
+		response.sendRedirect("cotacoes");
 	}
-
 }

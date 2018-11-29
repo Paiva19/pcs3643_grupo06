@@ -32,6 +32,7 @@
 		<th>Data de nascimento</th>
 		<th>Telefone</th>
 		<th>E-mail</th>
+		<th></th>
 	</tr>
 	<% for (int i=0; i<s.size(); i++) { %>
 	<tr>
@@ -40,6 +41,7 @@
 		<td><%= s.get(i).getData_de_nascimento() %></td>
 		<td><%= s.get(i).getTelefone() %></td>
 		<td><%= s.get(i).getEmail() %></td>
+		<td><a href="segurados?id_segurado=<%= s.get(i).getId_segurado() %>">Selecionar</a><td>
 	</tr>
 	<% } %>
 </table>
