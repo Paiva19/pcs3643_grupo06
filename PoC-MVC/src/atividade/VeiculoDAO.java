@@ -29,12 +29,12 @@ public class VeiculoDAO {
 		return conn;
 	}
 	
-	public boolean CreateVeiculo(Veiculo veiculo) throws SQLException {
+	public boolean CreateVeiculo(Veiculo veiculo, Segurado segurado) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try {
 		preparedStatement = connection.prepareStatement("INSERT INTO Veiculos (	"
-				+ "id_veiculo, fipe, marca, modelo, portas, anoFabricacao, anoModelo, nPassageiros, chassi, renavam, classe) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				+ "id_veiculo, fipe, marca, modelo, portas, anoFabricacao, anoModelo, nPassageiros, chassi, renavam, classe, fk_dono_do_veiculo) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		preparedStatement.setInt(1, veiculo.getId());
 		preparedStatement.setString(2, veiculo.getFipe());
 		preparedStatement.setString(3, veiculo.getMarca());
@@ -47,6 +47,7 @@ public class VeiculoDAO {
 		preparedStatement.setString(10, veiculo.getChassi());
 		preparedStatement.setString(11, veiculo.getRenavam());
 		preparedStatement.setString(12, veiculo.getClasse());
+		preparedStatement.setInt(13, segurado.getId_segurado());
 		ResultSet resultset = preparedStatement.executeQuery();
 		return true;
 		} catch (SQLException e) {
@@ -85,6 +86,36 @@ public class VeiculoDAO {
 			}
 		}
 	}
+	
+	public ArrayList<Veiculo> GetVeiculosByDonoId (int id) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		try{
+			ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+			preparedStatement = connection.prepareStatement("SELECT * FROM Veiculos WHERE fk_dono_do_veiculo = ?");
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()){
+				Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
+						resultSet.getInt("portas"), resultSet.getInt("anoFabricacao"), resultSet.getInt("anoModelo"), resultSet.getInt("nPassageiros"),
+						resultSet.getString("chassi"), resultSet.getString("renavam"), resultSet.getString("classe"));
+				veiculos.add(veiculo);
+			}
+			return veiculos;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if( preparedStatement != null ){
+				preparedStatement.close();
+			}
+			if( connection != null ){
+				connection.close();
+			}
+		}
+	}
+	
+	
 	
 	public ArrayList<Veiculo> GetAllVeiculos () throws SQLException {
 		PreparedStatement preparedStatement = null;
