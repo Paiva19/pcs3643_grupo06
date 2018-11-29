@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ApoliceDAO {
@@ -24,22 +25,26 @@ public class ApoliceDAO {
 		}
 	}
 	
-	public boolean create(Apolice apolice, Cotacao cotacao) throws SQLException {
+	public int create(Apolice apolice, Cotacao cotacao) throws SQLException {
 		PreparedStatement preparedstatement = null;
 		try {
 			preparedstatement = connection.prepareStatement("INSERT INTO Apolices ("
 					+ "data_de_inicio, data_de_fim, numero_da_apolice, status, fk_cotacao) "
-					+ "VALUES (?, ?, ?, ?, ?)");
+					+ "VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			preparedstatement.setDate(1, (Date) apolice.getData_de_inicio());
 			preparedstatement.setDate(2, (Date) apolice.getData_de_fim());
 			preparedstatement.setInt(3, apolice.getNumero_da_apolice());
 			preparedstatement.setString(4, apolice.getStatus());
 			preparedstatement.setInt(5, cotacao.getId());
 			int result = preparedstatement.executeUpdate();
-			return true;
+			ResultSet generatedKeys = preparedstatement.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				return (int) generatedKeys.getLong(1);
+			}
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		} finally {
 			if (preparedstatement != null) {
 				preparedstatement.close();
@@ -146,7 +151,7 @@ public class ApoliceDAO {
 			preparedstatement = connection.prepareStatement("DELETE FROM Apolices WHERE "
 					+ "id_apolice = ?");
 			preparedstatement.setInt(1, id);
-			ResultSet result = preparedstatement.executeQuery();
+			int result = preparedstatement.executeUpdate();
 			return true;
 			
 		} catch (SQLException e) {

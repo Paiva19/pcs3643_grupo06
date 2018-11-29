@@ -19,6 +19,9 @@ public class Cotacao {
 		return this.id;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Date getData_de_inicio() {
 		return data_de_inicio;
 	}
