@@ -1,6 +1,7 @@
 package atividade;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 
 /**
  * Servlet implementation class ControllerApolice
@@ -49,9 +51,12 @@ public class ControllerApolice extends HttpServlet {
 		} else {
 			ApoliceDAO apoliceDAO = new ApoliceDAO();
 			Apolice apolice;
+			Calendar currenttime = Calendar.getInstance();
+		    Date sqldate = new Date((currenttime.getTime()).getTime());
 			try {
 				apolice = apoliceDAO.findByPrimaryKey(Integer.parseInt(id));
 				request.setAttribute("apolice", apolice);
+				request.setAttribute("now", sqldate);
 				RequestDispatcher requestDispatcher =
 						getServletContext().getRequestDispatcher("/alterar_status_apolice.jsp");
 				requestDispatcher.forward(request, response);

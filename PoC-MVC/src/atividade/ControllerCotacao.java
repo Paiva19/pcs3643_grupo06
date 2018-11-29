@@ -61,22 +61,24 @@ public class ControllerCotacao extends HttpServlet {
 			}
 		} else {
 			ApoliceDAO apoliceDAO = new ApoliceDAO();
-			Apolice apolice = new Apolice(
-					0,
-					ThreadLocalRandom.current().nextInt(1, 70 + 1),
-					new Date(2018 - 1900, 11, 22),
-					new Date(2019 - 1900, 11, 22),
-					"ativa"
-			);
-			response.sendRedirect("apolices");
+			CotacaoDAO cotacaoDAO = new CotacaoDAO();
 			try {
-				apoliceDAO.create(apolice, new Cotacao(Integer.parseInt(id)));
-			} catch (NumberFormatException e) {
+				Cotacao cotacao = cotacaoDAO.findByPrimaryKey(Integer.parseInt(id));
+				Apolice apolice = new Apolice(
+						0,
+						ThreadLocalRandom.current().nextInt(1, 70 + 1),
+						(Date) cotacao.getData_de_inicio(),
+						(Date) cotacao.getData_de_fim(),
+						"ativa"
+				);
+				response.sendRedirect("apolices");
+				apoliceDAO.create(apolice, cotacao);
+			} catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
+				e1.printStackTrace();
+			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
 		}
 	}
