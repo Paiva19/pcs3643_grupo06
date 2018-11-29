@@ -24,12 +24,12 @@ public class SeguradoDAO {
 		}
 	}
 	
-	public boolean create(Segurado segurado) throws SQLException {
+	public int create(Segurado segurado) throws SQLException {
 		PreparedStatement preparedstatement = null;
 		try {
 			preparedstatement = connection.prepareStatement("INSERT INTO Segurados ("
 					+"id_segurado, nome, cpf, sexo, nacionalidade, data_de_nascimento, profissao, telefone, endereco, email, cnh) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			preparedstatement.setInt(1, segurado.getId_segurado());
 			preparedstatement.setString(2, segurado.getNome());
 			preparedstatement.setString(3, segurado.getCpf());
@@ -41,11 +41,15 @@ public class SeguradoDAO {
 			preparedstatement.setString(9, segurado.getEndereco());
 			preparedstatement.setString(10, segurado.getEmail());
 			preparedstatement.setString(11, segurado.getCnh());
-			
-			return true;
+			int result = preparedstatement.executeUpdate();
+			ResultSet generatedKeys = preparedstatement.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				return (int) generatedKeys.getLong(1);
+			}
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		} finally {
 			if (preparedstatement != null) {
 				preparedstatement.close();
@@ -115,7 +119,7 @@ public class SeguradoDAO {
 			preparedstatement = connection.prepareStatement("DELETE FROM Segurados WHERE "
 					+ "id_segurado = ?");
 			preparedstatement.setInt(1, id);
-			ResultSet result = preparedstatement.executeQuery();
+			int result = preparedstatement.executeUpdate();
 			return true;
 			
 		} catch (SQLException e) {
