@@ -40,14 +40,14 @@ public class ControllerSegurado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		String id = request.getParameter("id_segurado");
 		if (id == null){	
 			request.setAttribute("lista_segurados", this.segurados);
 			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/lista_segurados.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		else{
-			//deu ruim?
+			response.sendRedirect("cotacoes?id_segurado=" + id );
 		}
 		}
 
