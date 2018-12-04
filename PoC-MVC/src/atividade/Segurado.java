@@ -37,6 +37,10 @@ public class Segurado {
 		return this.id_segurado;
 	}
 
+	public void setId_segurado(int id) {
+		this.id_segurado = id;
+	}
+	
 	public String getNome() {
 		return this.nome;
 	}

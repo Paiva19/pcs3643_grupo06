@@ -34,6 +34,9 @@ public class Veiculo {
 	public int getId() {
 		return this.id_veiculo;
 	}
+	public void setId(int id) {
+		this.id_veiculo = id;
+	}
 	public String getModelo() {
 		return this.modelo;
 	}

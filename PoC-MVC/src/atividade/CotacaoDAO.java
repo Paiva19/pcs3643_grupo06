@@ -24,25 +24,28 @@ public class CotacaoDAO {
 		}
 	}
 	
-	public boolean create(Cotacao cotacao, Veiculo veiculo, Segurado segurado) throws SQLException {
+	public int create(Cotacao cotacao) throws SQLException {
 		PreparedStatement preparedstatement = null;
 		try {
 			preparedstatement = connection.prepareStatement("INSERT INTO Cotacoes ("
-					+ "data_de_inicio, data_de_fim, premio_liquido, premio_total, valor_veiculo, franquia, fk_segurado, fk_veiculo) "
-					+ "VALUES (?, ?, ?, ?, ?, ?)");
+					+ "data_de_inicio, data_de_fim, premio_liquido, premio_total, "
+					+ "valor_veiculo, franquia, fk_segurado, fk_veiculo) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, 1, 1)", Statement.RETURN_GENERATED_KEYS);
 			preparedstatement.setDate(1, (Date) cotacao.getData_de_inicio());
 			preparedstatement.setDate(2, (Date) cotacao.getData_de_fim());
 			preparedstatement.setFloat(3, cotacao.getPremio_liquido());
 			preparedstatement.setFloat(4, cotacao.getPremio_total());
 			preparedstatement.setFloat(5, cotacao.getValor_veiculo());
 			preparedstatement.setFloat(6, cotacao.getFranquia());
-			preparedstatement.setInt(7, segurado.getId_segurado());
-			preparedstatement.setInt(8, veiculo.getId());
-			ResultSet result = preparedstatement.executeQuery();
-			return true;
+			int result = preparedstatement.executeUpdate();
+			ResultSet generatedKeys = preparedstatement.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				return (int) generatedKeys.getLong(1);
+			}
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		} finally {
 			if (preparedstatement != null) {
 				preparedstatement.close();
@@ -187,7 +190,7 @@ public class CotacaoDAO {
 			preparedstatement = connection.prepareStatement("DELETE FROM Cotacoes WHERE "
 					+ "id_cotacao = ?");
 			preparedstatement.setInt(1, id);
-			ResultSet result = preparedstatement.executeQuery();
+			int result = preparedstatement.executeUpdate();
 			return true;
 			
 		} catch (SQLException e) {

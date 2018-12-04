@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class VeiculoDAO {
@@ -29,12 +30,12 @@ public class VeiculoDAO {
 		return conn;
 	}
 	
-	public boolean CreateVeiculo(Veiculo veiculo, Segurado segurado) throws SQLException {
+	public int CreateVeiculo(Veiculo veiculo, Segurado segurado) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try {
 		preparedStatement = connection.prepareStatement("INSERT INTO Veiculos (	"
 				+ "id_veiculo, fipe, marca, modelo, portas, anoFabricacao, anoModelo, nPassageiros, chassi, renavam, classe, fk_dono_do_veiculo) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 		preparedStatement.setInt(1, veiculo.getId());
 		preparedStatement.setString(2, veiculo.getFipe());
 		preparedStatement.setString(3, veiculo.getMarca());
@@ -44,15 +45,18 @@ public class VeiculoDAO {
 		preparedStatement.setInt(7, veiculo.getAnoModelo());
 		preparedStatement.setInt(8, veiculo.getnPassageiros());
 		preparedStatement.setString(9, veiculo.getChassi());
-		preparedStatement.setString(10, veiculo.getChassi());
-		preparedStatement.setString(11, veiculo.getRenavam());
-		preparedStatement.setString(12, veiculo.getClasse());
-		preparedStatement.setInt(13, segurado.getId_segurado());
-		ResultSet resultset = preparedStatement.executeQuery();
-		return true;
+		preparedStatement.setString(10, veiculo.getRenavam());
+		preparedStatement.setString(11, veiculo.getClasse());
+		preparedStatement.setInt(12, segurado.getId_segurado());
+		int result = preparedStatement.executeUpdate();
+		ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+		if (generatedKeys.next()) {
+			return (int) generatedKeys.getLong(1);
+		}
+		return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		} finally {
 			if( preparedStatement != null ){
 				preparedStatement.close();
@@ -158,10 +162,9 @@ public class VeiculoDAO {
 				preparedStatement.setInt(6, veiculo.getAnoModelo());
 				preparedStatement.setInt(7, veiculo.getnPassageiros());
 				preparedStatement.setString(8, veiculo.getChassi());
-				preparedStatement.setString(9, veiculo.getChassi());
-				preparedStatement.setString(10, veiculo.getRenavam());
-				preparedStatement.setString(11, veiculo.getClasse());
-				preparedStatement.setInt(12, veiculo.getId());
+				preparedStatement.setString(9, veiculo.getRenavam());
+				preparedStatement.setString(10, veiculo.getClasse());
+				preparedStatement.setInt(11, veiculo.getId());
 				
 				if(veiculo.getId() > 0){
 					ResultSet resultSet = preparedStatement.executeQuery();
@@ -187,7 +190,7 @@ public class VeiculoDAO {
 			preparedStatement = connection.prepareStatement("DELETE FROM Veiculos WHERE id_veiculo = ?");
 			preparedStatement.setInt(1, id);
 			if(id > 0){
-				ResultSet resultSet = preparedStatement.executeQuery();
+				int resultSet = preparedStatement.executeUpdate();
 				return true;
 			}
 			else return false;
