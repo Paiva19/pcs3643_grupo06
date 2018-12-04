@@ -28,14 +28,14 @@ public class TestVeiculos extends Auxiliar {
 	
 	@Test
 	public void testListAllVeiculos() {
-		String response = this.getHttp(this.formatUrl("/controllerVeiculo"));
+		String response = this.getHttp(this.formatUrl("/veiculos"));
 		assertTrue(response.contains("Lista de Veículos"));
 	}
 	
 	@Test
 	public void testDetailsAVeiculo() {
 		String response = this.getHttp(this.formatUrl(String.format(
-				"/controllerVeiculo?id=%d", TestVeiculos.veiculoId)));
+				"/veiculos?id=%d", TestVeiculos.veiculoId)));
 		assertTrue(response.contains("Detalhes de veículo"));
 	}
 	

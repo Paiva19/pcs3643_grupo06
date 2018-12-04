@@ -18,7 +18,7 @@ import com.ibm.CORBA.iiop.Request;
 /**
  * Servlet implementation class controllerVeiculo
  */
-@WebServlet("/controllerVeiculo")
+@WebServlet("/veiculos")
 public class controllerVeiculo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ArrayList<Veiculo> veiculos;
@@ -45,7 +45,7 @@ public class controllerVeiculo extends HttpServlet {
 		if (id == null){
 			
 			request.setAttribute("listarVeiculos", this.veiculos);
-			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/listarVeiculos.jsp");
+			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/listar_veiculos.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		else{
@@ -56,7 +56,7 @@ public class controllerVeiculo extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/detalheVeiculo.jsp");
+			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/detalhes_veiculo.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

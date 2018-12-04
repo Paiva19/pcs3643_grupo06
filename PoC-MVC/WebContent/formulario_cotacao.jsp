@@ -19,7 +19,7 @@ fieldset {
 <body>
 		<% Segurado segurado = (Segurado) request.getAttribute("segurado"); %>
 		<% ArrayList<Veiculo> veiculos = (ArrayList<Veiculo>) request.getAttribute("veiculos"); %>
-		<form method="POST" name="form1">
+		<form method="POST" name="form1" action="cotacoes">
 			<p>Olá, <b><%= segurado.getNome() %></b>!</p>
 			<input type="hidden" name="seguradoId" value="<%=segurado.getId_segurado() %>" />
 			<fieldset>
@@ -35,7 +35,7 @@ fieldset {
 					<option><%= veiculos.get(i).getModelo() %></option>
 					<% }; %>
 				</select>
-				<label><input type="radio" name="valorVeiculo" value="0" />Valor de Mercado Referenciado: </label><input type="number" name="VMR" value="12000,00"/><br />
+				<label><input type="radio" name="valorVeiculo" value="0" />Valor de Mercado Referenciado: </label><input type="number" name="VMR" value="12000.00" step="0.01"/><br />
 				<input type="radio" name="valorVeiculo" value="1" />
 				<input type="number" name="valorDeterminado" placeholder="Valor Determinado" pattern="^[0-9]+(\.[0-9]{1,2})?$" />
 			</fieldset>
@@ -45,7 +45,7 @@ fieldset {
 					type="checkbox"
 					name="danosMateriaisEnable"
 					onchange="document.form1.danosMateriais.disabled = !document.form1.danosMateriaisEnable.checked" />
-				<input type="number" name="danosMateriais" value="100000.00"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
+				<input type="number" name="danosMateriais" value="100000.00" step="0.01"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
 			</fieldset>
 			<fieldset>
 				<legend>Danos corporais</legend>
@@ -53,7 +53,7 @@ fieldset {
 					type="checkbox"
 					name="danosCorporaisEnable"
 					onchange="document.form1.danosCorporais.disabled = !document.form1.danosCorporaisEnable.checked" />
-				<input type="number" name="danosCorporais" value="100000.00"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
+				<input type="number" name="danosCorporais" value="100000.00" step="0.01"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
 			</fieldset>
 			<fieldset>
 				<legend>Franquia casco</legend>
@@ -78,7 +78,7 @@ fieldset {
 				<button>Finalizar Cotação</button>
 				<span style="float: right"><button>Gerar Apólice</button></span>
 			</fieldset>
-		</form>
+		</form><form action="segurados"><button>Cancelar</button></form>
 
 
 </body>
