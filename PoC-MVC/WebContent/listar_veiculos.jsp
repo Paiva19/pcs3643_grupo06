@@ -42,7 +42,7 @@
 			<td> <%= v.get(i).getAnoModelo() %> </td>
 			<td> <%= v.get(i).getAnoFabricacao() %> </td>
 			
-			<td> <a href="controllerVeiculo?id=<%= v.get(i).getId() %>">Detalhes</a> </td>
+			<td> <a href="veiculos?id=<%= v.get(i).getId() %>">Detalhes</a> </td>
 		</tr>
 		<% } %>
 	</table>

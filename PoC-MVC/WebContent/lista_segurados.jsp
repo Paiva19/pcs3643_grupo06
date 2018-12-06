@@ -41,9 +41,10 @@
 		<td><%= s.get(i).getData_de_nascimento() %></td>
 		<td><%= s.get(i).getTelefone() %></td>
 		<td><%= s.get(i).getEmail() %></td>
-		<td><a href="segurados?id_segurado=<%= s.get(i).getId_segurado() %>">Selecionar</a><td>
+		<td><a href="segurados?id_segurado=<%= s.get(i).getId_segurado() %>">Selecionar</a></td>
 	</tr>
 	<% } %>
 </table>
+<a href="home">Voltar</a>
 </body>
 </html>

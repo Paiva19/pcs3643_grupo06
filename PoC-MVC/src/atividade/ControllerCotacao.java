@@ -4,6 +4,7 @@ package atividade;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -34,7 +35,6 @@ public class ControllerCotacao extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("oi rs");
 		String id = request.getParameter("id");
 		String vender = request.getParameter("vender");
 		String id_segurado = request.getParameter("id_segurado");
@@ -136,9 +136,18 @@ public class ControllerCotacao extends HttpServlet {
 		
 		//Calculo Premios
 		
-		
-		
-		
-		response.sendRedirect("cotacoes");
+		Cotacao cotacao = new Cotacao(14);
+		Calendar currenttime = Calendar.getInstance();
+		cotacao.setData_de_inicio(new Date((currenttime.getTime()).getTime()));
+		cotacao.setData_de_fim(new Date((long) ((currenttime.getTime()).getTime() + 3.154e+10)));
+		cotacao.setValor_veiculo(valorVeiculo);
+		CotacaoDAO dao = new CotacaoDAO();
+		try {
+			dao.create(cotacao);
+			response.sendRedirect("cotacoes");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
