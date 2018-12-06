@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList,atividade.Cotacao" %>
+<%@ page import="java.util.ArrayList,atividade.Cotacao,atividade.Veiculo" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -33,18 +33,21 @@
 					<th>Valor do Veículo</th>
 					<th>Danos materiais</th>
 					<th>Danos corporais</th>
-					<th>Franquia</th>
+					<th>Franquia casco</th>
+					<th>Franquia acessórios</th>
 					<th>Prêmio total</th>
 				</tr>
 			</thead>
 			<tbody>
 				<% for (int i=0; i<c.size(); i++) { %>
 					<tr>
-						<td>TODO</td>
+						<% Veiculo v = c.get(i).getVeiculo(); %>
+						<td><%= v.getMarca() %> <%= v.getModelo() %> <%= v.getAnoModelo() %></td>
 						<td><%= c.get(i).getValor_veiculo() %></td>
-						<td>TODO</td>
-						<td>TODO</td>
+						<td><%= c.get(i).getDanos_materiais() %></td>
+						<td><%= c.get(i).getDanos_corporais() %></td>
 						<td><%= c.get(i).getFranquia() %></td>
+						<td><%= c.get(i).getFranquiaAcessorios() %></td>
 						<td><%= c.get(i).getPremio_total() %></td>
 						<td><a href="cotacoes?id=<%= c.get(i).getId() %>">Detalhes</a></td>
 					</tr>

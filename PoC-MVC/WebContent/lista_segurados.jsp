@@ -21,9 +21,11 @@
 		}
 		</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Lista de Clientes Cadastrados</title>
+<title>Nova cotação</title>
 </head>
 <body>
+<h2>Nova cotação</h2>
+<h3>Passo1: Selecionar segurado</h3>
 <% ArrayList<Segurado> s = (ArrayList<Segurado>) request.getAttribute("lista_segurados"); %>
 <table>
 	<tr>
