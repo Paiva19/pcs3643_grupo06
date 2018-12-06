@@ -18,6 +18,9 @@ fieldset {
 
 </head>
 <body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
+		</nav><div class="container">
 		<% Segurado segurado = (Segurado) request.getAttribute("segurado"); %>
 		<% ArrayList<Veiculo> veiculos = (ArrayList<Veiculo>) request.getAttribute("veiculos"); %>
 		<form method="POST" name="form1" action="cotacoes">
@@ -80,7 +83,7 @@ fieldset {
 				<span style="float: right"><button>Gerar Apólice</button></span>
 			</fieldset>
 		</form><form action="segurados"><button>Cancelar</button></form>
-
+		</div>
 
 </body>
 </html>

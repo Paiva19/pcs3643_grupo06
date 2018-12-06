@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
+	</nav>
+	<div class="container">
 	<% Veiculo v = (Veiculo) request.getAttribute("detalheVeiculo"); %>
 	<h2>Detalhes do veículo: <%= v.getModelo() %></h2>
 	<table>
@@ -32,6 +36,6 @@
 		</tr>
 	</table>
 	<a href="veiculos">Voltar</a>
-	
+	</div>
 </body>
 </html>

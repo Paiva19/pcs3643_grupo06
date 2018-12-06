@@ -10,6 +10,9 @@
 		<link rel="stylesheet" href="common.css" />
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
+	</nav><div class="container">
 	<% ArrayList<Apolice> c = (ArrayList<Apolice>) request.getAttribute("lista"); %>
 	<ul>
 		<% for (int i=0; i<c.size(); i++) { %>
@@ -17,6 +20,6 @@
 			<a href="apolices?&id=<%= c.get(i).getId() %>" title="Editar"><%= c.get(i).getStatus() %></a></li>
 		<% } %>
 	</ul>
-	<a href="home">Voltar</a>
+	<a href="home">Voltar</a></div>
 </body>
 </html>

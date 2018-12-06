@@ -19,6 +19,9 @@
 		</style>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
+		</nav>
 		<fieldset>
 			<legend>Cotação n. <%= c.getId() %></legend>
 			<p>Data de início: <%= c.getData_de_inicio() %></p>

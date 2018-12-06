@@ -26,6 +26,9 @@
 		</style>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
+		</nav><div class="container">
 		<% ArrayList<Cotacao> c = (ArrayList<Cotacao>) request.getAttribute("lista"); %>
 		<table>
 			<thead>
@@ -55,6 +58,6 @@
 				<% } %>
 			</tbody>
 		</table>
-		<a href="home">Voltar</a>
+		<a href="home">Voltar</a></div>
 	</body>
 </html>
