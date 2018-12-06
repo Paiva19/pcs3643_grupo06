@@ -31,9 +31,9 @@ fieldset {
 			</fieldset>
 			<fieldset>
 				<legend>Veículo segurado</legend>
-				<select style="display: block;">
+				<select style="display: block;" name="veiculoId">
 				<% for (int i =0; i<veiculos.size(); i++) { %>
-					<option><%= veiculos.get(i).getModelo() %></option>
+					<option value="<%= veiculos.get(i).getId() %>"><%= veiculos.get(i).getModelo() %></option>
 					<% }; %>
 				</select>
 				<label><input type="radio" name="valorVeiculo" value="0" />Valor de Mercado Referenciado: </label><input type="number" name="VMR" value="12000.00" step="0.01"/><br />

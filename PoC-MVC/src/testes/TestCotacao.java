@@ -22,6 +22,8 @@ public class TestCotacao extends Auxiliar {
 		cotacao.setPremio_liquido((float) 12);
 		cotacao.setPremio_total(13);
 		cotacao.setValor_veiculo(15);
+		cotacao.setSegurado_id(1);
+		cotacao.setVeiculo_id(1);
 		CotacaoDAO dao = new CotacaoDAO();
 		TestCotacao.cotacaoId = dao.create(cotacao);
 	}

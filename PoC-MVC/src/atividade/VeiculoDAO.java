@@ -73,11 +73,13 @@ public class VeiculoDAO {
 			preparedStatement = connection.prepareStatement("SELECT * FROM Veiculos WHERE id_veiculo = ?");
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
+			while (resultSet.next()) {
+				Veiculo veiculo = new Veiculo(resultSet.getInt("id_veiculo"), resultSet.getString("fipe"), resultSet.getString("marca"), resultSet.getString("modelo"),
 					resultSet.getInt("portas"), resultSet.getInt("anoFabricacao"), resultSet.getInt("anoModelo"), resultSet.getInt("nPassageiros"),
 					resultSet.getString("chassi"), resultSet.getString("renavam"), resultSet.getString("classe"));
-			return veiculo;
+				return veiculo;
+			}
+			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

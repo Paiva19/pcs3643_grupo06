@@ -29,6 +29,8 @@ public class TestApolices extends Auxiliar {
 		cotacao.setPremio_liquido(12);
 		cotacao.setPremio_total(13);
 		cotacao.setValor_veiculo(15);
+		cotacao.setSegurado_id(1);
+		cotacao.setVeiculo_id(1);
 		TestApolices.cotacaoId = cotacaoDAO.create(cotacao);
 		cotacao.setId(TestApolices.cotacaoId);
 		TestApolices.apoliceId = dao.create(apolice, cotacao);
