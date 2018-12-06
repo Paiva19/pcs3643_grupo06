@@ -21,10 +21,11 @@
 		}
 		</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nova cotação</title>
+<title>Nova cotaÃ§Ã£o</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<h2>Nova cotação</h2>
+<h2>Nova cotaÃ§Ã£o</h2>
 <h3>Passo1: Selecionar segurado</h3>
 <% ArrayList<Segurado> s = (ArrayList<Segurado>) request.getAttribute("lista_segurados"); %>
 <table>
