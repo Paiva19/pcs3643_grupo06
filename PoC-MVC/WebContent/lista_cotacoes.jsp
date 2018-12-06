@@ -14,7 +14,7 @@
 			border-spacing: 0;
 		}
 		table tbody tr {
-			background-color: #CCC;
+			/*background-color: #CCC;*/
 		}
 		table tbody tr:hover {
 			background-color: #EEE;
@@ -30,7 +30,7 @@
 			<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
 		</nav><div class="container">
 		<% ArrayList<Cotacao> c = (ArrayList<Cotacao>) request.getAttribute("lista"); %>
-		<table>
+		<table class="table">
 			<thead>
 				<tr>
 					<th>Modelo do Veículo</th>

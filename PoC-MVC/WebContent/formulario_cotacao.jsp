@@ -28,40 +28,43 @@ fieldset {
 			<input type="hidden" name="seguradoId" value="<%=segurado.getId_segurado() %>" />
 			<fieldset>
 				<legend>Tipo de cobertura</legend>
-				<select name="CoberturaTipo" disabled>
+				<select name="CoberturaTipo" disabled class="form-control">
 					<option value="0">Compreensivo</option>
 				</select>
 			</fieldset>
 			<fieldset>
 				<legend>Veículo segurado</legend>
-				<select style="display: block;" name="veiculoId">
+				<select style="display: block;" name="veiculoId" class="form-control">
 				<% for (int i =0; i<veiculos.size(); i++) { %>
 					<option value="<%= veiculos.get(i).getId() %>"><%= veiculos.get(i).getModelo() %></option>
 					<% }; %>
 				</select>
-				<label><input type="radio" name="valorVeiculo" value="0" />Valor de Mercado Referenciado: </label><input type="number" name="VMR" value="12000.00" step="0.01"/><br />
+				<div class="input-group">
+					<label><input type="radio" name="valorVeiculo" value="0" />Valor de Mercado Referenciado: </label>
+					<input type="number" name="VMR" value="12000.00" step="0.01" class="form-control"/></div>
+				<div class="input-group">
 				<input type="radio" name="valorVeiculo" value="1" />
-				<input type="number" name="valorDeterminado" placeholder="Valor Determinado" pattern="^[0-9]+(\.[0-9]{1,2})?$" />
+				<input type="number" name="valorDeterminado" placeholder="Valor Determinado" pattern="^[0-9]+(\.[0-9]{1,2})?$" class="form-control" /></div>
 			</fieldset>
 			<fieldset>
 				<legend>Danos materiais</legend>
-				<input
+				<div class="input-group"><input
 					type="checkbox"
 					name="danosMateriaisEnable"
 					onchange="document.form1.danosMateriais.disabled = !document.form1.danosMateriaisEnable.checked" />
-				<input type="number" name="danosMateriais" value="100000.00" step="0.01"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
+				<input type="number" name="danosMateriais" value="100000.00" step="0.01"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled class="form-control" /></div>
 			</fieldset>
 			<fieldset>
 				<legend>Danos corporais</legend>
-				<input
+				<div class="input-group"><input
 					type="checkbox"
 					name="danosCorporaisEnable"
 					onchange="document.form1.danosCorporais.disabled = !document.form1.danosCorporaisEnable.checked" />
-				<input type="number" name="danosCorporais" value="100000.00" step="0.01"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
+				<input type="number" name="danosCorporais" value="100000.00" step="0.01"  pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled class="form-control" /></div>
 			</fieldset>
 			<fieldset>
 				<legend>Franquia casco</legend>
-				<select name="franquiaCasco">
+				<select name="franquiaCasco" class="form-control">
 					<option value="0">Majorada</option>
 					<option value="1">Obrigatória</option>
 					<option value="2">Reduzida</option>
@@ -70,7 +73,7 @@ fieldset {
 			<fieldset>
 				<label><input type="checkbox" name="franquiaAcessorios" />Franquia acessórios</label>
 			</fieldset>
-			<input type="submit" />
+			<input type="submit" class="btn btn-primary" />
 			<fieldset id="premios" style="display:none;">
 				<legend>Prêmios</legend>
 				<p>Casco: PrêmioCasco</p>
@@ -82,7 +85,7 @@ fieldset {
 				<button>Finalizar Cotação</button>
 				<span style="float: right"><button>Gerar Apólice</button></span>
 			</fieldset>
-		</form><form action="segurados"><button>Cancelar</button></form>
+		</form><form action="segurados"><button class="btn btn-secondary">Cancelar</button></form>
 		</div>
 
 </body>

@@ -14,9 +14,9 @@
 		<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
 	</nav><div class="container">
 	<% ArrayList<Apolice> c = (ArrayList<Apolice>) request.getAttribute("lista"); %>
-	<ul>
+	<ul class="list-group">
 		<% for (int i=0; i<c.size(); i++) { %>
-			<li>Apolíce <%= c.get(i).getNumero_da_apolice() %>:
+			<li class="list-group-item">Apolíce <%= c.get(i).getNumero_da_apolice() %>:
 			<a href="apolices?&id=<%= c.get(i).getId() %>" title="Editar"><%= c.get(i).getStatus() %></a></li>
 		<% } %>
 	</ul>

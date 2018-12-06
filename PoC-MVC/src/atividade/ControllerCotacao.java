@@ -152,11 +152,11 @@ public class ControllerCotacao extends HttpServlet {
 		}
 		//Calculo Franquias
 		if (qualFranquiaCasco == 0) {//Majorada
-			franquiaCasco = 0.1f * qualFranquiaCasco * valorVeiculo;
+			franquiaCasco = 0.1f  * valorVeiculo;
 		} else if (qualFranquiaCasco == 1) {//Obrigatória
-			franquiaCasco = 0.08f * qualFranquiaCasco * valorVeiculo;
+			franquiaCasco = 0.08f * valorVeiculo;
 		} else {//Reduzida
-			franquiaCasco = 0.06f * qualFranquiaCasco * valorVeiculo;
+			franquiaCasco = 0.06f  * valorVeiculo;
 		}
 		franquiaAcessorios = 0.15f * valorAcessorios;
 		

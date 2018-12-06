@@ -18,7 +18,7 @@
 	<div class="container">
 	<p>Essa apólice encerra <%= ap.getData_de_fim() %></p>
 	<form method="POST">
-		<label>Status: <select name="status">
+		<label>Status: <select name="status" class="form-control">
 			<% if (ap.getData_de_fim().compareTo(agora) > 0) { %>
 				<option value="ativa">Ativa</option>
 				<option value="cancelada">Cancelada</option>
@@ -27,7 +27,7 @@
 			<% } %>
 		</select></label>
 		<input type="hidden" name="id" value="<%= ap.getId() %>" />
-		<input type="submit" />
+		<input type="submit" class="btn btn-primary" />
 	</form>
 	<a href="apolices">Voltar</a>
 	</div>

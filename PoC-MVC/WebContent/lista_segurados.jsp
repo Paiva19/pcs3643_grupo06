@@ -9,8 +9,8 @@
 			border-spacing: 0;
 		}
 		table tbody tr {
-			cursor: pointer;
-			background-color: #CCC;
+			/*cursor: pointer;
+			background-color: #CCC;*/
 		}
 		table tbody tr:hover {
 			background-color: #EEE;
@@ -32,7 +32,7 @@
 <h2>Nova cotação</h2>
 <h3>Passo1: Selecionar segurado</h3>
 <% ArrayList<Segurado> s = (ArrayList<Segurado>) request.getAttribute("lista_segurados"); %>
-<table>
+<table class="table">
 	<tr>
 		<th>Nome</th>
 		<th>CPF</th>

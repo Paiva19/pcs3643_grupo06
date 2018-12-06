@@ -14,10 +14,12 @@
 	<form method="POST">
 		<fieldset>
 			<legend>Datas</legend>
-			<label>Data inicial: <input type="date" name="data_inicial" /></label>
-			<label>Data final: <input type="date" name="data_final" /></label>
+			<div class="input-group">
+				<label>Data inicial: <input type="date" name="data_inicial" class="form-control" /></label>
+				<label>Data final: <input type="date" name="data_final" class="form-control" /></label>
+			</div>
 		</fieldset>
-		<button>Gerar relatório</button>
+		<button class="btn btn-primary">Gerar relatório</button>
 	</form>
 	<a href="home">Voltar</a></div>
 </body>

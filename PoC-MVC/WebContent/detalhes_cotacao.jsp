@@ -22,6 +22,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="home">SP Corretora de Seguros Ltda.</a>
 		</nav>
+		<div class="container">
 		<fieldset>
 			<legend>Cotação n. <%= c.getId() %></legend>
 			<p>Data de início: <%= c.getData_de_inicio() %></p>
@@ -95,11 +96,11 @@
 			<p>Prêmio Líquido: <%= c.getPremio_liquido() %>; Prêmio Total: <%= c.getPremio_total() %></p>
 		</fieldset>
 		<form method="GET" style="display:inline;">
-			<button>Confirmar venda</button>
+			<button class="btn btn-primary">Confirmar venda</button>
 			<input type="hidden" name="vender" value="1" />
 			<input type="hidden" name="id" value="<%= c.getId() %>" />
 		</form>
-		<span style="float: right"><form action="cotacoes"><button>Cancelar</button></form></span>
-		
+		<span style="float: right"><form action="cotacoes"><button class="btn btn-secondary">Cancelar</button></form></span>
+		</div>
 	</body>
 </html>
