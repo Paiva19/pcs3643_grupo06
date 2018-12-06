@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList,atividade.Cotacao" %>
+<%@ page import="java.util.ArrayList,atividade.Cotacao,atividade.Segurado,atividade.Veiculo" %>
 <!DOCTYPE html>
 <html>
 <% Cotacao c = (Cotacao) request.getAttribute("cotacao"); %>
+<% Segurado s = (Segurado) request.getAttribute("segurado"); %>
+<% Veiculo v = (Veiculo) request.getAttribute("veiculo"); %>
 	<head>
 		<meta charset="UTF-8" />
 		<title>Detalhes de Cotação #<%= c.getId() %></title>
@@ -33,16 +35,16 @@
 		</fieldset>
 		<fieldset>
 			<legend>Cliente</legend>
-			<p>${Nome}</p>
-			<p>${CPF}</p>
-			<p>${Sexo}</p>
-			<p>${Nacionalidade}</p>
-			<p>${DataDeNascimento}</p>
-			<p>${Profissão}</p>
-			<p>${Telefone}</p>
-			<p>${Endereço}</p>
-			<p>${Email}</p>
-			<p>${CNH}</p>
+			<p><%= s.getNome() %></p>
+			<p><%= s.getCpf() %></p>
+			<p><%= s.getSexo() %></p>
+			<p><%= s.getNacionalidade() %></p>
+			<p><%= s.getData_de_nascimento() %></p>
+			<p><%= s.getProfissao() %></p>
+			<p><%= s.getTelefone() %></p>
+			<p><%= s.getEndereco() %></p>
+			<p><%= s.getEmail() %></p>
+			<p><%= s.getCnh() %></p>
 		</fieldset>
 		<fieldset>
 			<legend>Seguradora</legend>
@@ -51,42 +53,41 @@
 		</fieldset>
 		<fieldset>
 			<legend>Veículo segurado</legend>
-			<p>${FIPE}</p>
-			<p>${Marca}</p>
-			<p>${Modelo}</p>
-			<p>${Portas}</p>
-			<p>${AnoFabricação}</p>
-			<p>${AnoModelo}</p>
-			<p>${NúmeroPassageiros}</p>
-			<p>${Chassi}</p>
-			<p>${Renavam}</p>
-			<p>${NomeCondutor}</p>
-			<p>${Classe}</p>
+			<p><%= v.getFipe() %></p>
+			<p><%= v.getMarca() %></p>
+			<p><%= v.getModelo() %></p>
+			<p><%= v.getPortas() %> portas</p>
+			<p>Fabricação <%= v.getAnoFabricacao() %></p>
+			<p>Modelo <%= v.getAnoModelo() %></p>
+			<p><%= v.getnPassageiros() %> passageiros</p>
+			<p><%= v.getChassi() %></p>
+			<p><%= v.getRenavam() %></p>
+			<p><%= v.getClasse() %></p>
 			<p><%= c.getValor_veiculo() %></p>
 		</fieldset>
 		<fieldset>
 			<legend>Danos materiais</legend>
-			<p>${DanosMateriais}</p>
+			<p><%= c.getDanos_materiais() %></p>
 		</fieldset>
 		<fieldset>
 			<legend>Danos corporais</legend>
-			<p>${DanosCorporais}</p>
+			<p><%= c.getDanos_corporais() %></p>
 		</fieldset>
 		<fieldset>
 			<legend>Franquia casco</legend>
-			<p>${FranquiaCasco}</p>
+			<p><%= c.getFranquia() %></p>
 		</fieldset>
 		<fieldset>
 			<legend>Franquia acessórios</legend>
-			<p>${FranquiaAcessórios}</p>
+			<p><%= c.getFranquiaAcessorios() %></p>
 		</fieldset>
 		<fieldset>
 			<legend>Prêmios</legend>
-			<p>Casco: <%= c.getFranquia() %></p>
-			<p>Acessórios: ${PrêmioAcessórios}</p>
-			<p>Danos materiais: ${PrêmioDanosMateriais}</p>
-			<p>Danos corporais: ${PrêmioDanosCorporais}</p>
-			<p>IOF: ${IOF}</p>
+			<p>Casco: <%= c.getPremio_casco() %></p>
+			<p>Acessórios: <%= c.getPremio_acessorios() %></p>
+			<p>Danos materiais: <%= c.getPremio_danos_materiais() %></p>
+			<p>Danos corporais: <%= c.getPremio_danos_corporais() %></p>
+			<p>IOF: <%= c.getIof() %></p>
 			<p>Prêmio Líquido: <%= c.getPremio_liquido() %>; Prêmio Total: <%= c.getPremio_total() %></p>
 		</fieldset>
 		<form method="GET" style="display:inline;">

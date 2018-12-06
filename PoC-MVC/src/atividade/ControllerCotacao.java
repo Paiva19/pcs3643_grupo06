@@ -69,6 +69,13 @@ public class ControllerCotacao extends HttpServlet {
 				CotacaoDAO cotacaoDAO = new CotacaoDAO();
 				Cotacao cotacao = cotacaoDAO.findByPrimaryKey(Integer.parseInt(id)); 
 				request.setAttribute("cotacao", cotacao);
+				SeguradoDAO seguradoDAO = new SeguradoDAO();
+				Segurado segurado = seguradoDAO.findByPrimaryKey(cotacao.getSegurado_id());
+				System.out.print(segurado == null);
+				request.setAttribute("segurado", segurado);
+				VeiculoDAO veiculoDAO = new VeiculoDAO();
+				Veiculo veiculo = veiculoDAO.findVeiculoByPrimaryKey(cotacao.getVeiculo_id());
+				request.setAttribute("veiculo", veiculo);
 				RequestDispatcher requestDispatcher =
 						getServletContext().getRequestDispatcher("/detalhes_cotacao.jsp");
 				requestDispatcher.forward(request, response);
@@ -108,12 +115,25 @@ public class ControllerCotacao extends HttpServlet {
 		String idVeiculo = request.getParameter("veiculoId");
 		System.out.println("ID segurado: " + idSegurado + " ID Veiculo: " + idVeiculo);
 		int vdOuVmr = Integer.parseInt(request.getParameter("valorVeiculo"));
-		float danosMateriais = Float.parseFloat(request.getParameter("danosMateriais"));
-		float danosCorporais = Float.parseFloat(request.getParameter("danosCorporais"));
+		float danosMateriais = 0f;
+		float danosCorporais = 0f;
+		float valorAcessorios = 0f;
+		try {
+			danosMateriais = Float.parseFloat(request.getParameter("danosMateriais"));
+		} catch (NullPointerException e) {
+			System.out.print("Sem danos materiais");
+		}
+		try {
+			danosCorporais = Float.parseFloat(request.getParameter("danosCorporais"));
+		} catch (NullPointerException e) {
+			System.out.print("Sem danos corporais");
+		}
 		int qualFranquiaCasco = Integer.parseInt(request.getParameter("franquiaCasco"));
-		float valorAcessorios = Float.parseFloat(request.getParameter("franquiaAcessorios"));
-		float valorVeiculo;
+		if (request.getParameter("franquiaAcessorios") != null) {
+			valorAcessorios = 1000f;
+		}
 		
+		float valorVeiculo;
 		float franquiaCasco = 0;
 		float franquiaAcessorios = 0;
 		float premioCasco = 0;
@@ -124,23 +144,56 @@ public class ControllerCotacao extends HttpServlet {
 		float premioLiquido = 0;
 		float premioTotal = 0;
 		
-		if(vdOuVmr == 0){
+		if(vdOuVmr == 1){
 			valorVeiculo = Float.parseFloat(request.getParameter("valorDeterminado"));
 		}
 		else {
 			valorVeiculo = Float.parseFloat(request.getParameter("VMR"));
 		}
 		//Calculo Franquias
-		franquiaCasco = (0.1f - 0.02f * qualFranquiaCasco) * valorVeiculo;
-		franquiaCasco = 0.15f * valorAcessorios;
+		if (qualFranquiaCasco == 0) {//Majorada
+			franquiaCasco = 0.1f * qualFranquiaCasco * valorVeiculo;
+		} else if (qualFranquiaCasco == 1) {//Obrigatória
+			franquiaCasco = 0.08f * qualFranquiaCasco * valorVeiculo;
+		} else {//Reduzida
+			franquiaCasco = 0.06f * qualFranquiaCasco * valorVeiculo;
+		}
+		franquiaAcessorios = 0.15f * valorAcessorios;
 		
 		//Calculo Premios
+		if (qualFranquiaCasco == 0) {//Majorada
+			premioCasco = 0.02f * valorVeiculo;
+		} else if (qualFranquiaCasco == 1) {//Obrigatória
+			premioCasco = 0.03f * valorVeiculo;
+		} else {//Reduzida
+			premioCasco = 0.05f * valorVeiculo;
+		}
+		premioAcessorios = 0.005f * valorAcessorios;
+		premioDanosMateriais = 0.0025f * danosMateriais;
+		premioDanosCorporais = 0.0025f * danosCorporais;
+		premioLiquido = premioCasco + premioAcessorios + premioDanosMateriais + premioDanosCorporais;
+		iof = 0.0738f * premioLiquido;
+		premioTotal = iof + premioLiquido;
 		
 		Cotacao cotacao = new Cotacao(14);
 		Calendar currenttime = Calendar.getInstance();
 		cotacao.setData_de_inicio(new Date((currenttime.getTime()).getTime()));
 		cotacao.setData_de_fim(new Date((long) ((currenttime.getTime()).getTime() + 3.154e+10)));
+		cotacao.setDanos_corporais(danosCorporais);
+		cotacao.setDanos_materiais(danosMateriais);
+		cotacao.setFranquia(franquiaCasco);
+		cotacao.setFranquiaAcessorios(franquiaAcessorios);
+		cotacao.setIof(iof);
+		cotacao.setPremio_acessorios(premioAcessorios);
+		cotacao.setPremio_casco(premioCasco);
+		cotacao.setPremio_danos_corporais(premioDanosCorporais);
+		cotacao.setPremio_danos_materiais(premioDanosMateriais);
+		cotacao.setPremio_liquido(premioLiquido);
+		cotacao.setPremio_total(premioTotal);
+		cotacao.setValor_acessorios(valorAcessorios);
 		cotacao.setValor_veiculo(valorVeiculo);
+		cotacao.setSegurado_id(Integer.parseInt(idSegurado));
+		cotacao.setVeiculo_id(Integer.parseInt(idVeiculo));
 		CotacaoDAO dao = new CotacaoDAO();
 		try {
 			dao.create(cotacao);

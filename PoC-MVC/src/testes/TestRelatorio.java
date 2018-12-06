@@ -36,6 +36,8 @@ public class TestRelatorio extends Auxiliar {
 		Cotacao cotacao = new Cotacao(14);
 		cotacao.setData_de_inicio(dataInicial);
 		cotacao.setData_de_fim(dataFinal);
+		cotacao.setSegurado_id(1);
+		cotacao.setVeiculo_id(1);
 		
 		ApoliceDAO dao = new ApoliceDAO();
 		CotacaoDAO cotacaoDAO = new CotacaoDAO();
